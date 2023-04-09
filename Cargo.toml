@@ -1,0 +1,26 @@
+[package]
+name = "ff_network"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "ff_network"
+crate-type = ["cdylib"]
+
+[dependencies]
+ndarray = {version = "0.15.6", features = ["blas", "rayon"]}
+blas-src = { version = "0.8", features = ["openblas"] }
+openblas-src = { version = "0.10", features = ["cblas", "system"] }
+numpy = "0.18.0"
+rand = "0.8.5"
+rand_distr = "0.4.3"
+pyo3 = {version = "0.18.1", features = ["extension-module"]}
+rayon = "1.7.0"
+
+[profile.release.package."*"]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+overflow-checks = false
